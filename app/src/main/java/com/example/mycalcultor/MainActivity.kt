@@ -77,7 +77,7 @@ fun ResultAndOperationView(
     Card(
         shape = RoundedCornerShape(10.dp),
         modifier = Modifier
-            .padding(bottom = 25.dp)
+            .padding(bottom = 35.dp)
     ) {
         Column(
             horizontalAlignment = Alignment.End,
@@ -85,18 +85,18 @@ fun ResultAndOperationView(
                 .background(color = Color.DarkGray)
                 .fillMaxWidth()
                 .fillMaxHeight(0.19f)
-                .padding(top = 20.dp, end = 30.dp)
+                .padding(top = 20.dp, end = 30.dp, bottom = 20.dp)
         ) {
             Text(
                 text = expression.value,
                 color = Color.White,
-                fontSize = 20.sp
+                fontSize = 25.sp
             )
             Spacer(modifier = Modifier.weight(1f))
             Text(
                 text = result.value,
                 color = Color.White,
-                fontSize = 55.sp,
+                fontSize = 35.sp,
                 fontWeight = FontWeight.Bold
             )
         }
