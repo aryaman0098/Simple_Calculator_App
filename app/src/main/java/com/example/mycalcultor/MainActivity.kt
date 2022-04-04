@@ -8,6 +8,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.ripple.rememberRipple
@@ -22,6 +23,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.mycalcultor.ui.theme.MyCalcultorTheme
+import java.lang.ArithmeticException
+import java.lang.Exception
 import javax.xml.xpath.XPathExpression
 import kotlin.math.exp
 
@@ -168,7 +171,8 @@ fun ResultAndOperationView(
                     expression.value += "7"
                 },
                 enabled = true,
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black),
+                colors = ButtonDefaults
+                    .buttonColors(backgroundColor = Color(0xFF180A0A)),
             ) {
                 Text(text = "7", color = Color.White, fontSize = 50.sp)
             }
@@ -177,7 +181,7 @@ fun ResultAndOperationView(
                     expression.value += "8"
                 },
                 enabled = true,
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF180A0A)),
             ) {
                 Text(text = "8", color = Color.White, fontSize = 50.sp)
             }
@@ -186,7 +190,7 @@ fun ResultAndOperationView(
                     expression.value += "9"
                 },
                 enabled = true,
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF180A0A)),
             ) {
                 Text(text = "9", color = Color.White, fontSize = 50.sp)
             }
@@ -202,7 +206,7 @@ fun ResultAndOperationView(
                     expression.value += "4"
                 },
                 enabled = true,
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF180A0A)),
             ) {
                 Text(text = "4", color = Color.White, fontSize = 50.sp)
             }
@@ -211,7 +215,7 @@ fun ResultAndOperationView(
                     expression.value += "5"
                 },
                 enabled = true,
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF180A0A)),
             ) {
                 Text(text = "5", color = Color.White, fontSize = 50.sp)
             }
@@ -220,7 +224,7 @@ fun ResultAndOperationView(
                     expression.value += "6"
                 },
                 enabled = true,
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF180A0A)),
             ) {
                 Text(text = "6", color = Color.White, fontSize = 50.sp)
             }
@@ -236,7 +240,7 @@ fun ResultAndOperationView(
                     expression.value += "1"
                 },
                 enabled = true,
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF180A0A)),
             ) {
                 Text(text = "1", color = Color.White, fontSize = 50.sp)
             }
@@ -245,7 +249,7 @@ fun ResultAndOperationView(
                     expression.value += "2"
                 },
                 enabled = true,
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF180A0A)),
 
             ) {
                 Text(text = "2", color = Color.White, fontSize = 50.sp)
@@ -255,7 +259,7 @@ fun ResultAndOperationView(
                     expression.value += "3"
                 },
                 enabled = true,
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF180A0A)),
 
             ) {
                 Text(text = "3", color = Color.White, fontSize = 50.sp)
@@ -273,7 +277,7 @@ fun ResultAndOperationView(
                     expression.value += "."
                 },
                 enabled = true,
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF180A0A)),
             ) {
                 Text(text = ".", color = Color.White, fontSize = 50.sp)
             }
@@ -282,7 +286,7 @@ fun ResultAndOperationView(
                     expression.value += "0"
                 },
                 enabled = true,
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF180A0A)),
             ) {
                 Text(text = "0", color = Color.White, fontSize = 50.sp)
             }
@@ -291,7 +295,7 @@ fun ResultAndOperationView(
                     result.value = evaluate(expression.value)
                 },
                 enabled = true,
-                colors = ButtonDefaults.buttonColors(backgroundColor = Color.Black),
+                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF180A0A)),
             ) {
                 Text(text = "=", color = Color.White, fontSize = 50.sp)
             }
@@ -301,14 +305,18 @@ fun ResultAndOperationView(
 
 fun evaluate(expression: String): String
 {
-    val digitsOperators = digitsOperators(expression)
-    if(digitsOperators.isEmpty()) return ""
+    try {
+        val digitsOperators = digitsOperators(expression)
+        if (digitsOperators.isEmpty()) return ""
 
-    val timesDivision = timesDivisionCalculate(digitsOperators)
-    if(timesDivision.isEmpty()) return ""
+        val timesDivision = timesDivisionCalculate(digitsOperators)
+        if (timesDivision.isEmpty()) return ""
 
-    val result = addSubtractCalculate(timesDivision)
-    return result.toString()
+        val result = addSubtractCalculate(timesDivision)
+        return result.toString()
+    }catch (e : Exception){
+        return "Expression Error"
+    }
 }
 
 fun addSubtractCalculate(passedList: MutableList<Any>): Float
